@@ -1,0 +1,3 @@
+[submodule "AdGuardHome"]
+	path = AdGuardHome
+	url = https://github.com/AdguardTeam/AdGuardHome.git
