@@ -17,12 +17,14 @@ COPY --from=stage1 /opt /opt
 WORKDIR /opt/AdGuardHome
 RUN make go-deps go-build
 
-FROM ghcr.io/cimisc/foundation:latest
+FROM debian:bullseye
 
 COPY --from=stage2 --chown=nobody:nogroup\
     /opt/AdGuardHome/AdGuardHome /opt/AdGuardHome/AdGuardHome
 
-RUN setcap 'cap_net_bind_service=+eip' /opt/AdGuardHome/AdGuardHome && \
+RUN apt-get update && apt-get -y install libcap2-bin dnsutils ca-certificates && \
+    rm -rf /var/cache/apt && \
+    setcap 'cap_net_bind_service=+eip' /opt/AdGuardHome/AdGuardHome && \
     mkdir -p /opt/workon
 
 WORKDIR /opt/AdGuardHome
