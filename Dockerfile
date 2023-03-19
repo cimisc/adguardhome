@@ -10,7 +10,7 @@ COPY AdGuardHome /opt/AdGuardHome
 WORKDIR /opt/AdGuardHome
 RUN make js-deps js-build
 
-FROM golang:1.18-bullseye as stage2
+FROM golang:1.20-bullseye as stage2
 
 COPY --from=stage1 /opt /opt
 
