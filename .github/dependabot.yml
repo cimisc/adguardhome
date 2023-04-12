@@ -9,8 +9,6 @@ updates:
     directory: /
     schedule:
       interval: daily
-    reviewers:
-      - Hirozy
     assignees:
       - Hirozy
 
@@ -18,7 +16,5 @@ updates:
     directory: /
     schedule:
       interval: daily
-    reviewers:
-      - Hirozy
     assignees:
       - Hirozy
