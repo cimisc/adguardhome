@@ -1,5 +1,6 @@
-FROM node:fermium-bookworm as stage1
+FROM node:iron-bookworm as stage1
 
+ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /opt
 
 RUN npm install --global vite
