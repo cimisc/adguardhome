@@ -1,4 +1,4 @@
-FROM node:fermium-bullseye as stage1
+FROM node:fermium-bookworm as stage1
 
 WORKDIR /opt
 
@@ -10,14 +10,14 @@ COPY AdGuardHome /opt/AdGuardHome
 WORKDIR /opt/AdGuardHome
 RUN make js-deps js-build
 
-FROM golang:1.21-bullseye as stage2
+FROM golang:1.21-bookworm as stage2
 
 COPY --from=stage1 /opt /opt
 
 WORKDIR /opt/AdGuardHome
 RUN make go-deps go-build
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 COPY --from=stage2 --chown=nobody:nogroup\
     /opt/AdGuardHome/AdGuardHome /opt/AdGuardHome/AdGuardHome
