@@ -1,4 +1,4 @@
-FROM node:iron-bookworm as stage1
+FROM node:iron-bookworm AS stage1
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /opt
@@ -11,7 +11,7 @@ COPY AdGuardHome /opt/AdGuardHome
 WORKDIR /opt/AdGuardHome
 RUN make js-deps js-build
 
-FROM golang:1.25-bookworm as stage2
+FROM golang:1.25-bookworm AS stage2
 
 COPY --from=stage1 /opt /opt
 
