@@ -11,7 +11,7 @@ COPY AdGuardHome /opt/AdGuardHome
 WORKDIR /opt/AdGuardHome
 RUN make js-deps js-build
 
-FROM golang:1.27.2-bookworm AS stage2
+FROM golang:1.27.3-bookworm AS stage2
 
 COPY --from=stage1 /opt /opt
 
