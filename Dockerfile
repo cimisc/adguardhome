@@ -1,4 +1,4 @@
-FROM node:iron-bookworm AS stage1
+FROM node:lts-trixie AS stage1
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /opt
@@ -11,14 +11,14 @@ COPY AdGuardHome /opt/AdGuardHome
 WORKDIR /opt/AdGuardHome
 RUN make js-deps js-build
 
-FROM golang:1.27.4-bookworm AS stage2
+FROM golang:1.27-trixie AS stage2
 
 COPY --from=stage1 /opt /opt
 
 WORKDIR /opt/AdGuardHome
 RUN make go-deps go-build
 
-FROM debian:bookworm
+FROM debian:trixie
 
 COPY --from=stage2 --chown=nobody:nogroup\
     /opt/AdGuardHome/AdGuardHome /opt/AdGuardHome/AdGuardHome
